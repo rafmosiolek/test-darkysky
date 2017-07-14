@@ -25,54 +25,20 @@ body {
 	border-radius: 6px;
 	padding: 20px 60px 60px 60px;
 
-	h1 {
-		font-size: 60px;
-		line-height: 1;
-		letter-spacing: -1px;
-	}
-	fieldset {
-		border: none;
-		padding: 0 0 20px 0;
-		ul {
-			list-style: none;
-			outline: none;
-			padding: 0;
-			li {
-				margin: 0 50px;
-				width: 200px;
-			}
-			label {
-				font-size: 10px;
-				padding: 0 75px;
-			}
-			input {
-				width: 100%;
-				border: none;
-				border-radius: 2px;
-				font-size: 10px;
-				height: 22px;
-				padding: 5px 8px;
-				&:focus {
-					outline: none;
-				}
-			}
+	.header {
+		h1 {
+			text-align: left;
+			font-size: 32px;
+			margin-bottom: 0px;
+		}
+		h2 {
+			text-align: left;
+			font-size: 20px;
+			margin-bottom: 0px;
+		}
+		h6 {
+			margin: 0;
+			font-size: 12px;
 		}
 	}
-	button {
-		width: 100%;
-		margin: 0px auto;
-		background: #bbb9b9;
-		outline: none;
-		height: 30px;
-		border: none;
-		border-radius: 6px;
-		&:hover {
-			background: #EFF0D1;
-			filter: drop-shadow(2px 4px 10px #0F1108);
-		}
-		&:active {
-			transform: translateY(2px);
-		}
-	}
-
 }
