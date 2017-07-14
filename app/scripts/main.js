@@ -79,7 +79,7 @@ window.onload = function() {
 		displayLocation(lat,long);
 	}
 
-	errorCallback(error) {
+	function errorCallback(error) {
 		var errorMsg = "Unknown error";
 		switch(error.code) {
 			case 1:
@@ -92,16 +92,16 @@ window.onload = function() {
 				errorMsg = "Timeout";
 				break;
 		}
-		document.write(errorMessage);
+		document.write(errorMsg);
 	}
-	
+
 	var Options = {
 		enableHighAccuracy: true,
-		timeout: 1000,
+		timeout: 7000,
 		maximumAge: 0
 	};
 
-	navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+	navigator.geolocation.getCurrentPosition(successCallback, errorCallback, Options);
 };
 
 
