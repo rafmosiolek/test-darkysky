@@ -1,108 +1,106 @@
+// window.onload = function() {
+// 	console.log("page loaded");
+// 	getLocation();
 
-// 	function geoLocation() {
-// 		var userLocation = document.getElementById("user-location");
+	
+// 	var userLocation = document.getElementById("userLocation");
 
-// 		if (!navigator.geolocation) {
-// 			userLocation.innerHTML = "<h2>Geolocation is not supported by your browser!</h2>";
-// 			return;
+	
+// 	function getLocation() {
+// 		if (navigator.geolocation) {
+// 			navigator.geolocation.getCurrentPosition(showPosition);
+
+// 		} else {
+// 			userLocation.innerHTML = "<h2>Geolocation is not supported by this browser.</h2>";
 // 		}
-
-// 		function success(position) {
-// 			var latitude = position.coords.latitude;
-// 			var longitude = position.coords.longitude;
-
-// 			console.log(latitude);
-// 			console.log(longitude);
-
-// 			userLocation.innerHTML = "<h1>Your location is: " + latitude + "° ," + longitude + "°</h1>";
-// 		}
-
-// 		function error() {
-// 			userLocation.innerHTML = "<h2>Unable to retrieve your location!</h2>";
-// 		}
-
-// 		navigator.geolocation.getCurrentPosition(success, error);
 // 	}
 
-// 	var body = document.querySelector("body");
-// 	body.addEventListener("onload", geoLocation);
+// 	function showPosition(position) {
+		
+// 		var userLocation = document.getElementById("userLocation");
+// 		var latitude = position.coords.latitude;
+// 		console.log(latitude);
+// 		var longitude = position.coords.longitude;
+// 		console.log(longitude);
+// 		userLocation.innerHTML = "<h1>Your location is: " + latitude + "° , " + longitude + "°</h1>";
+// 		getWeather(latitude, longitude);
+// 	}
 
+// 	navigator.geolocation.getCurrentPosition(getWeather);
+
+// 	function getWeather(lat, long) {
+
+
+// 		var darkskyKey = "c78e6b910ba14ef6ac41cfc1e46b3af5";
+
+// 		var request = new XMLHttpRequest();
+
+// 		var method = "GET";
+// 		var url = "https://api.darksky.net/forecast/" + darkskyKey + "/" + lat + "," + long;
+// 		var async = true;
+
+// 		request.open(method, url, async);
+// 		request.send();
+// 		var data = JSON.parse(request.responseText);
+// 		console.log(data);
+// 		console.log(request.open);
+
+// 		var script = document.createElement("script");
+// 		script.src = url + "?callback=getWeather";
+// 		document.getElementsByTagName('head')[0].appendChild(script);
+// 	}
 // };
 
-window.onload = function() {
-	console.log("page loaded");
-	getLocation();
-	
-	var userLocation = document.getElementById("userLocation");
 
-	
-	function getLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition);
 
-		} else {
-			userLocation.innerHTML = "<h2>Geolocation is not supported by this browser.</h2>";
-		}
-	}
 
-	function showPosition(position) {
-		
+	// function displayLocation(latitude, longitude) {
+	// 	var request = new XMLHttpRequest();
 
-		var latitude = position.coords.latitude;
-		console.log(latitude);
-		var longitude = position.coords.longitude;
-		console.log(longitude);
-		userLocation.innerHTML = "<h1>Your location is: " + latitude + "° , " + longitude + "°</h1>";
-	}
+	// 	var method = "GET";
+	// 	var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=AIzaSyBOmVQ0jdmYuP5bcll8ErGQe8dWNN_joZ4";
+	// 	var async = true;
 
-	function displayLocation(latitude, longitude) {
-		var request = new XMLHttpRequest();
+	// 	request.open(method, url, async);
+	// 	request.onreadystatechange = function() {
+	// 		if (request.readyState == 4 && request.status == 200) {
+	// 			var data = JSON.parse(request.responseText);
+	// 			var address = data.results[0];
+	// 			document.write(address.formatted_address);
+	// 		}
+	// 	};
+	// 	request.send();
+	// }
 
-		var method = "GET";
-		var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=AIzaSyBOmVQ0jdmYuP5bcll8ErGQe8dWNN_joZ4";
-		var async = true;
+	// function successCallback(position) {
+	// 	var lat = position.coords.latitude;
+	// 	var long = position.coords.longitude;
+	// 	displayLocation(lat,long);
+	// }
 
-		request.open(method, url, async);
-		request.onreadystatechange = function() {
-			if (request.readyState == 4 && request.status == 200) {
-				var data = JSON.parse(request.responseText);
-				var address = data.results[0];
-				document.write(address.formatted_address);
-			}
-		};
-		request.send();
-	}
+	// function errorCallback(error) {
+	// 	var errorMsg = "Unknown error";
+	// 	switch(error.code) {
+	// 		case 1:
+	// 			errorMsg = "Permission denied";
+	// 			break;
+	// 		case 2:
+	// 			errorMsg = "Position unavailable";
+	// 			break;
+	// 		case 3:
+	// 			errorMsg = "Timeout";
+	// 			break;
+	// 	}
+	// 	document.write(errorMsg);
+	// }
 
-	function successCallback(position) {
-		var lat = position.coords.latitude;
-		var long = position.coords.longitude;
-		displayLocation(lat,long);
-	}
+	// var Options = {
+	// 	enableHighAccuracy: true,
+	// 	timeout: 7000,
+	// 	maximumAge: 0
+	// };
 
-	function errorCallback(error) {
-		var errorMsg = "Unknown error";
-		switch(error.code) {
-			case 1:
-				errorMsg = "Permission denied";
-				break;
-			case 2:
-				errorMsg = "Position unavailable";
-				break;
-			case 3:
-				errorMsg = "Timeout";
-				break;
-		}
-		document.write(errorMsg);
-	}
-
-	var Options = {
-		enableHighAccuracy: true,
-		timeout: 7000,
-		maximumAge: 0
-	};
-
-	navigator.geolocation.getCurrentPosition(successCallback, errorCallback, Options);
-};
+	// navigator.geolocation.getCurrentPosition(successCallback, errorCallback, Options);
 
 
 
@@ -110,82 +108,92 @@ window.onload = function() {
 
 
 
-// $(document).ready(function() {
-//   getLocation();
-// })
 
-// function getLocation() {
-//   var location;
-//   $.ajax({
-//     format: "jsonp",
-//     dataType: "jsonp",
-//     url: "http://ip-api.com/json",
-//     success: function(data) {
-//       location = (data.lat + "," + data.lon);
-//       $("#weather-location").html(data.city + ", " + data.region);
-//       getURL(location)
-//     },
-//     error: function() {
-//       httpsLocation();
-//     },
-//     method: "GET"
-//   });
+$(document).ready(function() {
+  getLocation();
+});
 
-//   function httpsLocation() {
-//     if (navigator.geolocation) {
-//       var location;
-//       navigator.geolocation.getCurrentPosition(passLocation);
-//     }
-//   }
+function getLocation() {
+  var location;
+  $.ajax({
+    format: "jsonp",
+    dataType: "jsonp",
+    url: "http://ip-api.com/json",
+    success: function(data) {
+      location = (data.lat + "," + data.lon);
+      $("#userLocation").html(data.city + ", " + data.region);
+      console.log(data.city);
+      console.log(data.region);
+      getURL(location);
 
-//   function passLocation(position) {
-//     location = position.coords.latitude + ", " + position.coords.longitude;
-//     setCity(location);
-//     getURL(location);
-//   }
-// }
+    },
+    error: function() {
+      httpsLocation();
+    },
+    method: "GET"
+  });
 
-// function setCity(latLon) {
-//   var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon + "&sensor=true";
-//   url = url.replace(/\s/g, "");
-//   $.ajax({
-//     format: "json",
-//     dataType: "json",
-//     url: url,
-//     success: function(data) {
-//       $('#weather-location').html(data.results[0].address_components[2].long_name);
-//     },
-//     method: "GET"
-//   });
-// }
+  function httpsLocation() {
+    if (navigator.geolocation) {
+      var location;
+      navigator.geolocation.getCurrentPosition(passLocation);
+    }
+  }
 
-// function getURL(location, tempSetting) {
-//   var url = ("https://api.forecast.io/forecast/2b4b9e2d0c9c7ba61f588616d2967c9c/" + location);
-//   //console.log(url);
-//   getJson(url);
+  function passLocation(position) {
+    location = position.coords.latitude + ", " + position.coords.longitude;
+    setCity(location);
+    getURL(location);
+    console.log(location);
+  }
+}
 
-// }
+function setCity(latLon) {
+  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon + "&sensor=true";
+  url = url.replace(/\s/g, "");
+  $.ajax({
+    format: "json",
+    dataType: "json",
+    url: url,
+    success: function(data) {
+      $('#userLocation').html(data.results[0].address_components[2].long_name);
+    },
+    method: "GET"
+  });
+}
 
-// function getJson(url) {
-//   //console.log("started getJson with this url: " + url);
+function getURL(location, tempSetting) {
+  var url = ("https://api.darksky.net/forecast/c78e6b910ba14ef6ac41cfc1e46b3af5/" + location + "?units=si");
+  //console.log(url);
+  getJson(url);
 
-//   $.ajax({
-//       format: "jsonp",
-//       dataType: "jsonp",
-//       url: url,
-//       success: function(json) {
-//         //console.log("great success");
-//         $("#weather-current").html(Math.round(json.currently.temperature) + "°");
-//         $("#weather-high").html("High: " + Math.round(json.daily.data[0].temperatureMax) + "°");
-//         $("#weather-low").html("Low: " + Math.round(json.daily.data[0].temperatureMin) + "°");
-//         setBackground(json.currently.icon);
-//       }
+}
 
-//     })
-//     .error(function(jqXHR, textStatus, errorThrown) {
-//       alert("error: " + JSON.stringify(jqXHR));
-//     })
-// }
+function getJson(url) {
+  //console.log("started getJson with this url: " + url);
+
+  $.ajax({
+      format: "jsonp",
+      dataType: "jsonp",
+      url: url,
+      success: function(json) {
+        //console.log("great success");
+        $("#temp-data").html("Current temperature at your location is: " + json.currently.temperature + "°C");
+        // $("#temp-data").html("High: " + Math.round(json.daily.data[0].temperatureMax) + "°");
+        // $("#temp-data").html("Low: " + Math.round(json.daily.data[0].temperatureMin) + "°");
+        // setBackground(json.currently.icon);
+        console.log(json.currently.temperature);
+        console.log(json.daily.data[0].temperatureMax);
+        console.log(json.daily.data[0].temperatureMin);
+        console.log(json.currently.time);
+        console.log(json.daily.data[0].icon);
+      }
+
+    })
+    .error(function(jqXHR, textStatus, errorThrown) {
+      alert("error: " + JSON.stringify(jqXHR));
+    });
+}
 
 // $("#temp-type").on("click", function() {
 //   var currentTemp = $("#weather-current").html().replace(/°/g, "");
